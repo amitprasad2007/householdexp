@@ -14,11 +14,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'index'])->name('calendar');
     Route::get('/calendar/day/{date}', [\App\Http\Controllers\DailyReportController::class, 'index'])->name('calendar.day');
     Route::resource('accounts', \App\Http\Controllers\AccountController::class);
